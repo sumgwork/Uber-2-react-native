@@ -10,6 +10,8 @@ import React from 'react'
 import tw from 'tailwind-react-native-classnames'
 import { Icon } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
+import { useSelector } from 'react-redux'
+import { selectOrigin } from '../slices/navSlice'
 
 const data = [
   {
@@ -28,6 +30,7 @@ const data = [
 
 const NavOptions = () => {
   const { navigate } = useNavigation()
+  const origin = useSelector(selectOrigin)
 
   return (
     <View>
@@ -38,8 +41,14 @@ const NavOptions = () => {
           <TouchableOpacity
             style={tw`p-4 bg-gray-200 m-2`}
             onPress={() => navigate(item.screen)}
+            disabled={!origin}
           >
-            <View style={styles.button}>
+            <View
+              style={{
+                ...styles.button,
+                ...tw`${!origin && 'opacity-20'}`,
+              }}
+            >
               <Image
                 style={styles.image}
                 source={{
