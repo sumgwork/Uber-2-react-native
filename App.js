@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  View,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native'
 import { Provider } from 'react-redux'
 import HomeScreen from './screens/HomeScreen'
 import EatsScreen from './screens/EatsScreen'
@@ -15,28 +21,34 @@ export default function App() {
     <Provider store={store}>
       <SafeAreaProvider>
         <NavigationContainer>
-          <Stack.Navigator
-            initialRouteName="HomeScreen"
-            screenOptions={{
-              headerShown: true,
-            }}
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={{ flex: 1 }}
+            keyboardVerticalOffset={Platform.OS === 'ios' ? -64 : 0}
           >
-            <Stack.Screen
-              name="HomeScreen"
-              component={HomeScreen}
-              options={{ title: 'Home' }}
-            />
-            <Stack.Screen
-              name="MapScreen"
-              component={MapScreen}
-              options={{ title: 'Journey' }}
-            />
-            <Stack.Screen
-              name="EatsScreen"
-              component={EatsScreen}
-              options={{ title: 'Eat' }}
-            />
-          </Stack.Navigator>
+            <Stack.Navigator
+              initialRouteName="HomeScreen"
+              screenOptions={{
+                headerShown: true,
+              }}
+            >
+              <Stack.Screen
+                name="HomeScreen"
+                component={HomeScreen}
+                options={{ title: 'Home' }}
+              />
+              <Stack.Screen
+                name="MapScreen"
+                component={MapScreen}
+                options={{ title: 'Journey' }}
+              />
+              <Stack.Screen
+                name="EatsScreen"
+                component={EatsScreen}
+                options={{ title: 'Eat' }}
+              />
+            </Stack.Navigator>
+          </KeyboardAvoidingView>
         </NavigationContainer>
       </SafeAreaProvider>
     </Provider>
