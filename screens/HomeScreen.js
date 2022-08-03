@@ -22,7 +22,7 @@ const HomeScreen = () => {
         <GooglePlacesAutocomplete
           nearbyPlacesAPI="GooglePlacesSearch"
           debounce={300}
-          placeholder="Where from"
+          placeholder="Where from?"
           onPress={(data, details = null) => {
             // 'details' is provided when fetchDetails = true
             dispatch(
