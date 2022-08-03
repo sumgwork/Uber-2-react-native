@@ -9,6 +9,7 @@ import {
 import React from 'react'
 import tw from 'tailwind-react-native-classnames'
 import { Icon } from 'react-native-elements'
+import { useNavigation } from '@react-navigation/native'
 
 const data = [
   {
@@ -26,13 +27,18 @@ const data = [
 ]
 
 const NavOptions = () => {
+  const { navigate } = useNavigation()
+
   return (
     <View>
       <FlatList
         horizontal
         data={data}
         renderItem={({ item }) => (
-          <TouchableOpacity style={tw`p-4 bg-gray-200 m-2`}>
+          <TouchableOpacity
+            style={tw`p-4 bg-gray-200 m-2`}
+            onPress={() => navigate(item.screen)}
+          >
             <View style={styles.button}>
               <Image
                 style={styles.image}
